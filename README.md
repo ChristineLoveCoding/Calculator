@@ -1,10 +1,10 @@
 # CSC 413 - Project One
 
-## Student Name  : Name here
+## Student Name  : Ting Feng
 
-## Student ID    : ID here
+## Student ID    : 922992561
 
-## Student Email : Email here
+## Student Email : tfeng@sfsu.edu
 
 ### Note failure to completely fill out this README.md could cause you to recieve a  0 for your project until correctly done
 
