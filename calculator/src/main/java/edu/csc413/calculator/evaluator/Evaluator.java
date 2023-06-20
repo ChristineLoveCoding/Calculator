@@ -47,9 +47,11 @@ public class Evaluator {
           // The Operator class should contain an instance of a HashMap,
           // and values will be instances of the Operators.  See Operator class
           // skeleton for an example.
-          Operator newOperator = new Operator();
+          Operator newOperator = Operator.getOperator(expressionToken);
+
+
         
-          while (operatorStack.peek().priority() >= newOperator.priority() ) {
+          while (!operatorStack.empty() && operatorStack.peek().priority() >= newOperator.priority() ) {
             // note that when we eval the expression 1 - 2 we will
             // push the 1 then the 2 and then do the subtraction operation
             // This means that the first number to be popped is the
@@ -66,6 +68,14 @@ public class Evaluator {
       }
     }
 
+        while (!operatorStack.empty()){
+          Operator operatorFromStack = operatorStack.pop();
+          Operand operandTwo = operandStack.pop();
+          Operand operandOne = operandStack.pop();
+          Operand result = operatorFromStack.execute( operandOne, operandTwo );
+          operandStack.push( result );
+
+        }
 
     // Control gets here when we've picked up all of the tokens; you must add
     // code to complete the evaluation - consider how the code given here
@@ -75,7 +85,7 @@ public class Evaluator {
     // In order to complete the evaluation we must empty the stacks,
     // that is, we should keep evaluating the operator stack until it is empty;
     // Suggestion: create a method that processes the operator stack until empty.
-
-    return 0;
+    int result = operandStack.peek().getValue();
+    return result;
   }
 }
