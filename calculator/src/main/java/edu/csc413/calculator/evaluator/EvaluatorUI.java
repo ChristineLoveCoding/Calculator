@@ -66,6 +66,7 @@ public class EvaluatorUI extends JFrame implements ActionListener {
         setLocationByPlatform(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        setBackground(Color.green);
     }
 
     /**
@@ -75,7 +76,28 @@ public class EvaluatorUI extends JFrame implements ActionListener {
      *                    button is pressed.
      */
     public void actionPerformed(ActionEvent actionEventObject) {
+        String cmd = actionEventObject.getActionCommand();
+        System.out.println(cmd);
 
-
+        String text = expressionTextField.getText();
+        switch(cmd ) {
+            case "C":
+                expressionTextField.setText("");
+                break;
+            case "CE":
+                expressionTextField.setText(text.replaceAll("(\\d)+$", ""));
+                break;
+            case "=" :
+                Evaluator evaluator = new Evaluator();
+                try {
+                    int r = evaluator.evaluateExpression(text);
+                    expressionTextField.setText(""+r);
+                } catch (InvalidTokenException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                expressionTextField.setText(text + cmd);
+        }
     }
 }
